@@ -2,6 +2,7 @@ package com.jjackb14.blissapbot.playerlist;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.jjackb14.blissapbot.player.Player;
 import org.junit.jupiter.api.Test;
 
 /**
