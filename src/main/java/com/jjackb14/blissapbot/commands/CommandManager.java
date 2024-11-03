@@ -17,12 +17,15 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * Manages all the commands associated with the BlissAPBot.
  *
+ * @author Jack Benoit
  */
 public class CommandManager extends ListenerAdapter {
 
     /**
-     * @param event
+     * Executes the various functionalities based on the slash command entered.
+     * @param event The slash command event.
      */
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
@@ -57,7 +60,8 @@ public class CommandManager extends ListenerAdapter {
     }
 
     /**
-     * @param event
+     * Adds the Commands to the bot when the guild is ready.
+     * @param event The guild event.
      */
     @Override
     public void onGuildReady(@NotNull GuildReadyEvent event) {
