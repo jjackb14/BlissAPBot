@@ -1,5 +1,6 @@
 package com.jjackb14.blissapbot.commands;
 
+import com.jjackb14.blissapbot.exceptions.ExistingPlayerException;
 import com.jjackb14.blissapbot.player.Player;
 import com.jjackb14.blissapbot.playerlist.PlayerList;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -45,8 +46,12 @@ public class CommandManager extends ListenerAdapter {
 
                 String response = "You have been successfully registered to the AP System!";
 
-                //TODO will need a try catch when existing player has been implemented
-                playerList.addPlayer(newPlayer);
+                try {
+                    playerList.addPlayer(newPlayer);
+                }
+                catch (ExistingPlayerException e) {
+                    response = "Your gamertag is already registered. If you believe this is an error please make a ticket to contact an Admin";
+                }
 
                 EmbedBuilder eb = new EmbedBuilder();
                 eb.setDescription(response);

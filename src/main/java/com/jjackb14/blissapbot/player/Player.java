@@ -56,6 +56,9 @@ public class Player {
     /** The name of the Player's tribe that they are in. */
     private String tribeName;
 
+    /** A Players AP. */
+    private int ap;
+
     /** Max length that a Player name, GamerTag, and tribe name can be. Based of ARK's max. */
     private static final int MAX_NAME_LENGTH = 24;
 
@@ -79,12 +82,28 @@ public class Player {
      * @param gamerTag The GamerTag of the Player registering.
      * @param map The Main map that the Player plays on.
      * @param tribeName The name of the tribe that a player is a member of.
+     * @param ap The amount of AP a player has.
      */
-    public Player(String userName, String gamerTag, String map, String tribeName) {
+    public Player(String userName, String gamerTag, String map, String tribeName, int ap) {
         setUserName(userName);
         setGamerTag(gamerTag);
         setMap(map);
         setTribeName(tribeName);
+        setAP(ap);
+    }
+
+
+    /**
+     * Creates a new Player based on the information given by the user.
+     * This is the constructor that will be called on by the bot when the user is registering in
+     * the #register channel in the Bliss discord server.
+     * @param userName The in-game name of the Player registering.
+     * @param gamerTag The GamerTag of the Player registering.
+     * @param map The Main map that the Player plays on.
+     * @param tribeName The name of the tribe that a player is a member of.
+     */
+    public Player(String userName, String gamerTag, String map, String tribeName) {
+        this(userName, gamerTag, map, tribeName, 0);
     }
 
     /**
@@ -203,5 +222,24 @@ public class Player {
         this.tribeName = tribeName;
     }
 
+    /**
+     * Gets the value of the AP field.
+     * @return The value of the AP field.
+     */
+    public int getAp() {
+        return ap;
+    }
 
+    /**
+     * Sets the value of the AP field.
+     * @param ap The value of AP to be set.
+     * @throws IllegalArgumentException if AP is less than 1.
+     */
+    public void setAP(int ap) {
+        if (ap < 1) {
+            throw new IllegalArgumentException("Error adding AP.");
+        }
+
+        this.ap = ap;
+    }
 }
