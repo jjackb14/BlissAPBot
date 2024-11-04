@@ -1,14 +1,13 @@
 package com.jjackb14.blissapbot.bot;
 
 import com.jjackb14.blissapbot.commands.CommandManager;
-import com.jjackb14.blissapbot.database.SQLiteDataSource;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 
 import javax.security.auth.login.LoginException;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * A Discord bot for managing the Activity Points System on ARK Bliss.
@@ -29,7 +28,6 @@ public class BlissAPBot {
      * @throws SQLException
      */
     public BlissAPBot() throws LoginException, SQLException {
-        SQLiteDataSource.getConnection();
 
         config = Dotenv.configure().load();
         String token = config.get("TOKEN");
@@ -39,6 +37,8 @@ public class BlissAPBot {
 
         //Register listeners
         shardManager.addEventListener(new CommandManager());
+
+        System.out.println("Bot started");
     }
 
     /**

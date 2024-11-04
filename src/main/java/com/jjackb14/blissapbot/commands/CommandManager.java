@@ -35,8 +35,6 @@ public class CommandManager extends ListenerAdapter {
 
         switch (command) {
             case("register") -> {
-                event.deferReply().setEphemeral(true).queue();
-
                 String ign = Objects.requireNonNull(event.getOption("ign")).getAsString();
                 String gamertag = Objects.requireNonNull(event.getOption("gamertag")).getAsString();
                 String tribe = Objects.requireNonNull(event.getOption("tribe")).getAsString();
@@ -46,17 +44,20 @@ public class CommandManager extends ListenerAdapter {
 
                 String response = "You have been successfully registered to the AP System!";
 
-                try {
-                    playerList.addPlayer(newPlayer);
-                }
-                catch (ExistingPlayerException e) {
-                    response = "Your gamertag is already registered. If you believe this is an error please make a ticket to contact an Admin";
-                }
+//                try {
+//                    playerList.addPlayer(newPlayer);
+//                }
+//                catch (ExistingPlayerException e) {
+//                    response = "Your gamertag is already registered. If you believe this is an error please make a ticket to contact an Admin";
+//                }
 
                 EmbedBuilder eb = new EmbedBuilder();
                 eb.setDescription(response);
 
-                event.getHook().sendMessageEmbeds(eb.build()).queue();
+                event.reply(response).queue();
+            }
+            case("test") -> {
+                event.reply("Test message").queue();
             }
             default -> {
                 return;
@@ -71,6 +72,9 @@ public class CommandManager extends ListenerAdapter {
     @Override
     public void onGuildReady(@NotNull GuildReadyEvent event) {
         List<CommandData> commandData = new ArrayList<>();
+        //Command /test
+        commandData.add(Commands.slash("test", "a debug command"));
+
         // Command: /register [IGN], [GT], [Tribe], [Map]
         commandData.add(Commands.slash("register", "Register to the AP System.")
                 .addOptions(

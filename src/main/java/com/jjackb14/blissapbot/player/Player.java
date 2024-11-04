@@ -59,6 +59,9 @@ public class Player {
     /** A Players AP. */
     private int ap;
 
+    /** Counter for the number of times a player has been seen. */
+    private int seen;
+
     /** Max length that a Player name, GamerTag, and tribe name can be. Based of ARK's max. */
     private static final int MAX_NAME_LENGTH = 24;
 
@@ -84,12 +87,13 @@ public class Player {
      * @param tribeName The name of the tribe that a player is a member of.
      * @param ap The amount of AP a player has.
      */
-    public Player(String userName, String gamerTag, String map, String tribeName, int ap) {
+    public Player(String userName, String gamerTag, String map, String tribeName, int ap, int seen) {
         setUserName(userName);
         setGamerTag(gamerTag);
         setMap(map);
         setTribeName(tribeName);
-        setAP(ap);
+        this.ap = ap;
+        this.seen = seen;
     }
 
 
@@ -103,7 +107,7 @@ public class Player {
      * @param tribeName The name of the tribe that a player is a member of.
      */
     public Player(String userName, String gamerTag, String map, String tribeName) {
-        this(userName, gamerTag, map, tribeName, 0);
+        this(userName, gamerTag, map, tribeName, 0, 0);
     }
 
     /**
@@ -241,5 +245,17 @@ public class Player {
         }
 
         this.ap = ap;
+    }
+
+    public int getSeen() {
+        return seen;
+    }
+
+    public void setSeen(int seen) {
+        if (seen < 0 || seen > 7) {
+            throw new IllegalArgumentException("Seen too much");
+        }
+
+        this.seen = seen;
     }
 }
