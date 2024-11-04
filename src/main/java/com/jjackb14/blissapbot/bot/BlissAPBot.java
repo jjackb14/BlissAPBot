@@ -1,12 +1,14 @@
 package com.jjackb14.blissapbot.bot;
 
 import com.jjackb14.blissapbot.commands.CommandManager;
+import com.jjackb14.blissapbot.database.SQLiteDataSource;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 
 import javax.security.auth.login.LoginException;
+import java.sql.SQLException;
 
 /**
  * A Discord bot for managing the Activity Points System on ARK Bliss.
@@ -24,8 +26,11 @@ public class BlissAPBot {
     /**
      * Loads environment variables and builds the ShardManager.
      * @throws LoginException when bot token is invalid.
+     * @throws SQLException
      */
-    public BlissAPBot() throws LoginException {
+    public BlissAPBot() throws LoginException, SQLException {
+        SQLiteDataSource.getConnection();
+
         config = Dotenv.configure().load();
         String token = config.get("TOKEN");
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(token);
@@ -60,7 +65,7 @@ public class BlissAPBot {
         try {
             BlissAPBot bot = new BlissAPBot();
         }
-        catch (LoginException e) {
+        catch (LoginException | SQLException e) {
             System.out.println("ERROR: Provided token is not valid");
         }
 
