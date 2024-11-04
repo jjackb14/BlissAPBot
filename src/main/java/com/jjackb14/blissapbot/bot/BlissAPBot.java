@@ -1,12 +1,15 @@
 package com.jjackb14.blissapbot.bot;
 
 import com.jjackb14.blissapbot.commands.CommandManager;
+import com.jjackb14.blissapbot.database.Database;
+import com.jjackb14.blissapbot.player.Player;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 
 import javax.security.auth.login.LoginException;
+import javax.xml.crypto.Data;
 import java.sql.*;
 
 /**
@@ -37,6 +40,8 @@ public class BlissAPBot {
 
         //Register listeners
         shardManager.addEventListener(new CommandManager());
+
+        Database db = Database.getInstance();
 
         System.out.println("Bot started");
     }

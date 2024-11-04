@@ -53,4 +53,16 @@ public class Database {
         }
     }
 
+    public void removeData(String gamertag) {
+        try {
+            PreparedStatement stmt = con.prepareStatement("DELETE FROM players WHERE gamertag=(?)");
+            stmt.setString(1, gamertag);
+            stmt.executeUpdate();
+            System.out.println("Removal Completed");
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
