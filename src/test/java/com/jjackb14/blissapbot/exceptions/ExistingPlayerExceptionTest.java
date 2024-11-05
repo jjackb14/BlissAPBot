@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Tests the Exception ExistingPlayerException.
- *
- * @author Jack Benoit
  */
 public class ExistingPlayerExceptionTest {
 

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- *
+ * Tests playerlist. Will probably be deleted soon.
  */
 public class PlayerListTest {
 

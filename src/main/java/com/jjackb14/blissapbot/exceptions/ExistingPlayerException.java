@@ -4,8 +4,6 @@ import java.io.Serial;
 
 /**
  * Creates an exception for if a player already exists within the
- *
- * @author Jack Benoit
  */
 public class ExistingPlayerException extends Exception {
 

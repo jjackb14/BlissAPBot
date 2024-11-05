@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Tests the Player class of the BlissAPBot system.
- *
- * @author Jack Benoit
  */
 public class PlayerTest {
 

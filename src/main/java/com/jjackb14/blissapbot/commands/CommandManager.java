@@ -1,9 +1,6 @@
 package com.jjackb14.blissapbot.commands;
 
-import com.jjackb14.blissapbot.exceptions.ExistingPlayerException;
-import com.jjackb14.blissapbot.player.Player;
 import com.jjackb14.blissapbot.playerlist.PlayerList;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -16,12 +13,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Manages all the commands associated with the BlissAPBot.
- *
- * @author Jack Benoit
  */
 public class CommandManager extends ListenerAdapter {
 

@@ -4,16 +4,28 @@ import com.jjackb14.blissapbot.player.Player;
 
 import java.sql.*;
 
+/**
+ * Manages the Database for BlissAPBot following the singleton design pattern.
+ */
 public class Database {
 
+    /** The current instance of the database. */
     private static Database instance;
 
-    Connection con;
+    /** The connection to the database. */
+    private Connection con;
 
+    /**
+     * Creates a database object and creates the connection to the MySQL database.
+     */
     public Database() {
         createConnection();
     }
 
+    /**
+     * Gets the instance of the database.
+     * @return The instance of the database.
+     */
     public static synchronized Database getInstance() {
         if (instance == null) {
             instance = new Database();
@@ -22,6 +34,10 @@ public class Database {
         return instance;
     }
 
+    /**
+     * Creates the connection to the database.
+     * @throws RuntimeException if there are any issues connecting to the database.
+     */
     public void createConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -36,6 +52,11 @@ public class Database {
 
     }
 
+    /**
+     * Adds a player to the database.
+     * @param player The player to be added.
+     * @throws RuntimeException if there are any issues adding to the database.
+     */
     public void insertData(Player player) {
         try {
             PreparedStatement stmt = con.prepareStatement("INSERT INTO players (user_name, gamertag, map, tribe, ap, seen) VALUES (?, ?, ?, ?, ?, ?)");
@@ -53,6 +74,11 @@ public class Database {
         }
     }
 
+    /**
+     * Removes a player from the database based on their gamertag.
+     * @param gamertag The players gamertag.
+     * @throws RuntimeException if there are any issues removing that player from the database.
+     */
     public void removeData(String gamertag) {
         try {
             PreparedStatement stmt = con.prepareStatement("DELETE FROM players WHERE gamertag=(?)");

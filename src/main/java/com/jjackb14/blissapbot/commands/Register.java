@@ -8,8 +8,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+/**
+ * The backend functionality of the /register command.
+ */
 public class Register {
 
+    /**
+     * Registers a user to the AP system. That user is then stored in the Database.
+     * @param event Event provided by the command.
+     */
     public static void register(@NotNull SlashCommandInteractionEvent event) {
         Database db = Database.getInstance();
 

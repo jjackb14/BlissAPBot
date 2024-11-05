@@ -2,20 +2,16 @@ package com.jjackb14.blissapbot.bot;
 
 import com.jjackb14.blissapbot.commands.CommandManager;
 import com.jjackb14.blissapbot.database.Database;
-import com.jjackb14.blissapbot.player.Player;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 
 import javax.security.auth.login.LoginException;
-import javax.xml.crypto.Data;
 import java.sql.*;
 
 /**
  * A Discord bot for managing the Activity Points System on ARK Bliss.
- *
- * @author Jack Benoit
  */
 public class BlissAPBot {
 
@@ -28,7 +24,7 @@ public class BlissAPBot {
     /**
      * Loads environment variables and builds the ShardManager.
      * @throws LoginException when bot token is invalid.
-     * @throws SQLException
+     * @throws SQLException if there are errors with the Database.
      */
     public BlissAPBot() throws LoginException, SQLException {
 

@@ -1,5 +1,6 @@
 com.jjackb14.blissapbot.bot
 com.jjackb14.blissapbot.commands
+com.jjackb14.blissapbot.database
 com.jjackb14.blissapbot.exceptions
 com.jjackb14.blissapbot.player
 com.jjackb14.blissapbot.playerlist

@@ -2,8 +2,6 @@ package com.jjackb14.blissapbot.player;
 
 /**
  * Creates a new Player to be stored in the AP System database.
- *
- * @author Jack Benoit
  */
 public class Player {
 
@@ -68,6 +66,7 @@ public class Player {
      * @param map The Main map that the Player plays on.
      * @param tribeName The name of the tribe that a player is a member of.
      * @param ap The amount of AP a player has.
+     * @param seen The number of times the player has been seen in a week.
      */
     public Player(String userName, String gamerTag, String map, String tribeName, int ap, int seen) {
         setUserName(userName);
@@ -199,10 +198,19 @@ public class Player {
         this.ap = ap;
     }
 
+    /**
+     * Gets the number of times a player has been seen in a week.
+     * @return The number of times a player has been seen in a week.
+     */
     public int getSeen() {
         return seen;
     }
 
+    /**
+     * Sets the number of times a player has been seen.
+     * @param seen The value to set.
+     * @throws IllegalArgumentException if seen is less than 0 or greater than 7.
+     */
     public void setSeen(int seen) {
         if (seen < 0 || seen > 7) {
             throw new IllegalArgumentException("Seen too much");

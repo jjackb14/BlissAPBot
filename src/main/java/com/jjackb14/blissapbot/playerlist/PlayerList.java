@@ -8,8 +8,6 @@ import java.util.Comparator;
 
 /**
  * Manages the List of Players for the BlissAPBot.
- *
- * @author Jack Benoit
  */
 public class PlayerList {
 
