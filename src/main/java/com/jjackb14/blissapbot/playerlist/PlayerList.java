@@ -1,6 +1,5 @@
 package com.jjackb14.blissapbot.playerlist;
 
-import com.jjackb14.blissapbot.exceptions.ExistingPlayerException;
 import com.jjackb14.blissapbot.player.Player;
 
 import java.util.ArrayList;
@@ -27,21 +26,6 @@ public class PlayerList {
      */
     public void newPlayerList() {
         this.playerList = new ArrayList<>();
-    }
-
-    /**
-     * Adds a player to the PlayerList.
-     * @param player The player to add to the PlayerList.
-     * @throws ExistingPlayerException if the player is already registered.
-     */
-    public void addPlayer(Player player) throws ExistingPlayerException {
-        for (Player player1 : playerList) {
-            if (player1.getGamerTag().equals(player.getGamerTag())) {
-                throw new ExistingPlayerException();
-            }
-        }
-        playerList.add(player);
-        playerList.sort(Comparator.comparing(Player::getUserName));
     }
 
     /**
