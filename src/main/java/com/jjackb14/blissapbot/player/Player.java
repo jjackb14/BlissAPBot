@@ -1,5 +1,9 @@
 package com.jjackb14.blissapbot.player;
 
+import com.jjackb14.blissapbot.exceptions.InvalidGamertagException;
+import com.jjackb14.blissapbot.exceptions.InvalidNameException;
+import com.jjackb14.blissapbot.exceptions.InvalidTribeNameException;
+
 /**
  * Creates a new Player to be stored in the AP System database.
  */
@@ -68,7 +72,8 @@ public class Player {
      * @param ap The amount of AP a player has.
      * @param seen The number of times the player has been seen in a week.
      */
-    public Player(String userName, String gamerTag, String map, String tribeName, int ap, int seen) {
+    public Player(String userName, String gamerTag, String map, String tribeName, int ap, int seen) throws InvalidNameException,
+            InvalidGamertagException, InvalidTribeNameException {
         setUserName(userName);
         setGamerTag(gamerTag);
         setMap(map);
@@ -87,8 +92,14 @@ public class Player {
      * @param map The Main map that the Player plays on.
      * @param tribeName The name of the tribe that a player is a member of.
      */
-    public Player(String userName, String gamerTag, String map, String tribeName) {
-        this(userName, gamerTag, map, tribeName, 0, 0);
+    public Player(String userName, String gamerTag, String map, String tribeName) throws InvalidNameException, InvalidGamertagException,
+            InvalidTribeNameException {
+        setUserName(userName);
+        setGamerTag(gamerTag);
+        setMap(map);
+        setTribeName(tribeName);
+        this.ap = 0;
+        this.seen = 0;
     }
 
     /**
@@ -103,12 +114,12 @@ public class Player {
      * Sets the value of the field userName with the Player's in-game name.
      * @param userName The Player's in-game name.
      */
-    public void setUserName(String userName) {
+    public void setUserName(String userName) throws InvalidNameException {
         if (userName == null || "".equals(userName)) {
-            throw new IllegalArgumentException("Error making player.");
+            throw new InvalidNameException();
         }
         if (userName.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException("Error making player.");
+            throw new InvalidNameException();
         }
         this.userName = userName;
     }
@@ -125,12 +136,12 @@ public class Player {
      * Sets the value of the field gamerTag with the Player's GamerTag.
      * @param gamerTag The Player's GamerTag.
      */
-    public void setGamerTag(String gamerTag) {
+    public void setGamerTag(String gamerTag) throws InvalidGamertagException {
         if (gamerTag == null || "".equals(gamerTag)) {
-            throw new IllegalArgumentException("Error making player.");
+            throw new InvalidGamertagException();
         }
         if (gamerTag.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException("Error making player.");
+            throw new InvalidGamertagException();
         }
         this.gamerTag = gamerTag;
     }
@@ -167,12 +178,12 @@ public class Player {
      * Sets the value of the field tribeName with the name of a Player's tribe.
      * @param tribeName The name of a Player's tribe.
      */
-    public void setTribeName(String tribeName) {
+    public void setTribeName(String tribeName) throws InvalidTribeNameException {
         if (tribeName == null || "".equals(tribeName)) {
-            throw new IllegalArgumentException("Error making player.");
+            throw new InvalidTribeNameException();
         }
         if (tribeName.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException("Error making player.");
+            throw new InvalidTribeNameException();
         }
         this.tribeName = tribeName;
     }

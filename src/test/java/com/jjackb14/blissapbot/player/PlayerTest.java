@@ -2,6 +2,9 @@ package com.jjackb14.blissapbot.player;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.jjackb14.blissapbot.exceptions.InvalidGamertagException;
+import com.jjackb14.blissapbot.exceptions.InvalidNameException;
+import com.jjackb14.blissapbot.exceptions.InvalidTribeNameException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -13,7 +16,7 @@ public class PlayerTest {
      * Tests the Player constructor for valid values.
      */
     @Test
-    public void testValidPlayerConstructor() {
+    public void testValidPlayerConstructor() throws InvalidNameException, InvalidGamertagException, InvalidTribeNameException {
         //Tests reasonable name input.
         Player p1 = new Player("Bulby", "ShawtySLAP", "Island", "NordVPN");
         assertEquals("Bulby", p1.getUserName());

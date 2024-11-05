@@ -1,6 +1,8 @@
 package com.jjackb14.blissapbot.playerlist;
 
-import com.jjackb14.blissapbot.exceptions.ExistingPlayerException;
+import com.jjackb14.blissapbot.exceptions.InvalidGamertagException;
+import com.jjackb14.blissapbot.exceptions.InvalidNameException;
+import com.jjackb14.blissapbot.exceptions.InvalidTribeNameException;
 import com.jjackb14.blissapbot.player.Player;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +21,10 @@ public class PlayerListTest {
             list.addPlayer(new Player("Bulby", "ShawtySLAP", "Island", "NordVPN"));
             list.addPlayer(new Player("Luna", "NotLuna", "Center", "FakeTribe"));
         }
-        catch (ExistingPlayerException e) {
+        catch (InvalidNameException | InvalidGamertagException e) {
             fail("Player already exists in the list.");
+        } catch (InvalidTribeNameException e) {
+            throw new RuntimeException(e);
         }
 
         assertEquals(2, list.getPlayerList().size());

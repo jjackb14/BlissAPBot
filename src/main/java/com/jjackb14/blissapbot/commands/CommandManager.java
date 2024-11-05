@@ -49,11 +49,12 @@ public class CommandManager extends ListenerAdapter {
     public void onGuildReady(@NotNull GuildReadyEvent event) {
         List<CommandData> commandData = new ArrayList<>();
         //Command /test
-        commandData.add(Commands.slash("test", "a debug command"));
+        commandData.add(Commands.slash("test", "a debug command")
+                .setDefaultPermissions(DefaultMemberPermissions.DISABLED));
 
         // Command: /register [IGN], [GT], [Tribe], [Map]
         commandData.add(Commands.slash("register", "Register to the AP System.")
-                .setDefaultPermissions(DefaultMemberPermissions.ENABLED)
+                .setDefaultPermissions(DefaultMemberPermissions.DISABLED)
                 .addOptions(
                         new OptionData(OptionType.STRING, "ign", "Your character name on Bliss.", true),
                         new OptionData(OptionType.STRING, "gamertag", "Your gamertag.", true),

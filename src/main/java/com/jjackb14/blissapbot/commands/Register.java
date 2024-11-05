@@ -1,6 +1,9 @@
 package com.jjackb14.blissapbot.commands;
 
 import com.jjackb14.blissapbot.database.Database;
+import com.jjackb14.blissapbot.exceptions.InvalidGamertagException;
+import com.jjackb14.blissapbot.exceptions.InvalidNameException;
+import com.jjackb14.blissapbot.exceptions.InvalidTribeNameException;
 import com.jjackb14.blissapbot.player.Player;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -38,6 +41,15 @@ public class Register {
         } catch (RuntimeException e) {
             response = "Failed to add player to the Database.";
             System.out.println("Player could not be added to the DB, probably already exists.");
+        } catch (InvalidNameException e) {
+            response = e.getMessage();
+            System.out.println("Invalid register attempted");
+        } catch (InvalidGamertagException e) {
+            response = e.getMessage();
+            System.out.println("Invalid register attempted");
+        } catch (InvalidTribeNameException e) {
+            response = e.getMessage();
+            System.out.println("Invalid register attempted");
         }
 
         EmbedBuilder eb = new EmbedBuilder();
