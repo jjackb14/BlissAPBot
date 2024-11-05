@@ -32,6 +32,8 @@ public class PlayerTest {
         assertEquals(twentyFourCharName, p2.getGamerTag());
         assertEquals("Island", p2.getMap());
         assertEquals(twentyFourCharName, p2.getTribeName());
+
+        Player p3 = new Player("Luna", "NotLuna", "Aberration", "AdminTribe");
     }
 
     /**
@@ -63,11 +65,6 @@ public class PlayerTest {
         Exception e5 = assertThrows(IllegalArgumentException.class, () ->
                 new Player("Bulby", "ShawtySLAP", null, "NordVPN"));
         assertEquals("Error making player.", e5.getMessage());
-
-        //Tests making a player with a map that is not contained in the Maps enum.
-        Exception e6 = assertThrows(IllegalArgumentException.class, () ->
-                new Player("Bulby", "ShawtySLAP", "Ragnarok", "NordVPN"));
-        assertEquals("Error making player.", e6.getMessage());
 
         //Tests making a player with a null tribe name.
         Exception e7 = assertThrows(IllegalArgumentException.class, () ->

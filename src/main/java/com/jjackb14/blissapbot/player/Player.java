@@ -26,24 +26,6 @@ public class Player {
         REMEMBERED
     }
 
-    /**
-     * Contains all the possible maps that a player on Bliss can be on.
-     */
-    public enum Maps {
-
-        /** The Island Map. */
-        ISLAND,
-
-        /** Scorched Earth Map. */
-        SCORCHED,
-
-        /** The Center Map. */
-        CENTER,
-
-        /** Aberration Map. */
-        ABERRATION
-    }
-
     /** Player's player name on all Bliss servers. */
     private String userName;
 
@@ -51,7 +33,7 @@ public class Player {
     private String gamerTag;
 
     /** Player's main map that they play on */
-    private Maps map;
+    private String map;
 
     /** The name of the Player's tribe that they are in. */
     private String tribeName;
@@ -159,24 +141,7 @@ public class Player {
      * @return The Map a Player mainly plays on.
      */
     public String getMap() {
-        if (map.equals(Maps.ISLAND)) {
-            return ISLAND_NAME;
-        }
-        else if (map.equals(Maps.SCORCHED)) {
-            return SCORCHED_NAME;
-        }
-        else if (map.equals(Maps.CENTER)) {
-            return CENTER_NAME;
-        }
-        else if (map.equals(Maps.ABERRATION)) {
-            return ABERRATION_NAME;
-        }
-        else {
-            //It is intended that this line will never be reached however it exists in case
-            //of a catastrophic failure for debugging purposes.
-            throw new IllegalArgumentException("IllegalArgumentException throw in getter, "
-                    + "SERIOUS PROBLEM");
-        }
+        return map;
     }
 
     /**
@@ -187,21 +152,8 @@ public class Player {
         if (map == null || "".equals(map)) {
             throw new IllegalArgumentException("Error making player.");
         }
-        switch(map) {
-            case ISLAND_NAME:
-                this.map = Maps.ISLAND;
-                break;
-            case SCORCHED_NAME:
-                this.map = Maps.SCORCHED;
-                break;
-            case CENTER_NAME:
-                this.map = Maps.CENTER;
-                break;
-            case ABERRATION_NAME:
-                this.map = Maps.ABERRATION;
-            default:
-                throw new IllegalArgumentException("Error making player.");
-        }
+
+        this.map = map;
     }
 
     /**

@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
@@ -35,26 +36,7 @@ public class CommandManager extends ListenerAdapter {
 
         switch (command) {
             case("register") -> {
-                String ign = Objects.requireNonNull(event.getOption("ign")).getAsString();
-                String gamertag = Objects.requireNonNull(event.getOption("gamertag")).getAsString();
-                String tribe = Objects.requireNonNull(event.getOption("tribe")).getAsString();
-                String map = Objects.requireNonNull(event.getOption("map")).getAsString();
-
-                Player newPlayer = new Player(ign, gamertag, map, tribe);
-
-                String response = "You have been successfully registered to the AP System!";
-
-//                try {
-//                    playerList.addPlayer(newPlayer);
-//                }
-//                catch (ExistingPlayerException e) {
-//                    response = "Your gamertag is already registered. If you believe this is an error please make a ticket to contact an Admin";
-//                }
-
-                EmbedBuilder eb = new EmbedBuilder();
-                eb.setDescription(response);
-
-                event.reply(response).queue();
+                Register.register(event);
             }
             case("test") -> {
                 event.reply("Test message").queue();
@@ -77,10 +59,15 @@ public class CommandManager extends ListenerAdapter {
 
         // Command: /register [IGN], [GT], [Tribe], [Map]
         commandData.add(Commands.slash("register", "Register to the AP System.")
+                .setDefaultPermissions(DefaultMemberPermissions.ENABLED)
                 .addOptions(
                         new OptionData(OptionType.STRING, "ign", "Your character name on Bliss.", true),
                         new OptionData(OptionType.STRING, "gamertag", "Your gamertag.", true),
-                        new OptionData(OptionType.STRING, "map", "The main map you play on. Please only provide 1 map.", true),
+                        new OptionData(OptionType.STRING, "map", "The main map you play on.", true)
+                                .addChoice("The Island", "Island")
+                                .addChoice("The Center", "Center")
+                                .addChoice("Scorched Earth", "Scorched")
+                                .addChoice("Aberration", "Aberration"),
                         new OptionData(OptionType.STRING, "tribe", "The name of your tribe.", true)
                 ));
 
