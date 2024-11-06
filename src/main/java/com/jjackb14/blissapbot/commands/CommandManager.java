@@ -32,6 +32,9 @@ public class CommandManager extends ListenerAdapter {
             case("register") -> {
                 Register.register(event);
             }
+            case("remove") -> {
+                Remove.remove(event);
+            }
             case("test") -> {
                 event.reply("Test message").queue();
             }
@@ -64,6 +67,14 @@ public class CommandManager extends ListenerAdapter {
                                 .addChoice("Scorched Earth", "Scorched")
                                 .addChoice("Aberration", "Aberration"),
                         new OptionData(OptionType.STRING, "tribe", "The name of your tribe.", true)
+                ));
+
+        // Command: /remove [GT]
+        commandData.add(Commands.slash("remove", "Remove a player from the AP Sytem.")
+                .setDefaultPermissions(DefaultMemberPermissions.DISABLED)
+                .addOptions(
+                        new OptionData(OptionType.STRING, "ign", "The ign of the player to remove", true),
+                        new OptionData(OptionType.STRING, "gamertag", "The gamertag of the player to remove", true)
                 ));
 
         // Adds the Commands to the bot

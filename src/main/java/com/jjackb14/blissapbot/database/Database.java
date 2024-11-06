@@ -79,13 +79,20 @@ public class Database {
      * @param gamertag The players gamertag.
      * @throws RuntimeException if there are any issues removing that player from the database.
      */
-    public void removeData(String gamertag) {
+    public boolean removeData(String user_name, String gamertag) {
         try {
-            PreparedStatement stmt = con.prepareStatement("DELETE FROM players WHERE gamertag=(?)");
-            stmt.setString(1, gamertag);
-            stmt.executeUpdate();
-            System.out.println("Removal Completed");
+            PreparedStatement stmt = con.prepareStatement("DELETE FROM players WHERE user_name=(?) AND gamertag=(?)");
+            stmt.setString(1, user_name);
+            stmt.setString(2, gamertag);
+            int rowsDeleted = stmt.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Removal Completed");
+            }
+            else {
+                System.out.println("Removal failed. Probably aren't in the DB.");
+            }
             stmt.close();
+            return rowsDeleted > 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
