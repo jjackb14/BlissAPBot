@@ -38,18 +38,38 @@ public class Register {
             response = "Registration failed. Make sure that you have entered a valid map and that your IGN, tribe name, or Gamertag is not " +
                     "more than 24 characters";
             System.out.println("Invalid register attempted");
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setDescription(response);
+
+            event.replyEmbeds(eb.build()).setEphemeral(true).queue();
         } catch (RuntimeException e) {
             response = "Failed to add player to the Database.";
             System.out.println("Player could not be added to the DB, probably already exists.");
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setDescription(response);
+
+            event.replyEmbeds(eb.build()).setEphemeral(true).queue();
         } catch (InvalidNameException e) {
             response = e.getMessage();
             System.out.println("Invalid register attempted");
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setDescription(response);
+
+            event.replyEmbeds(eb.build()).setEphemeral(true).queue();
         } catch (InvalidGamertagException e) {
             response = e.getMessage();
             System.out.println("Invalid register attempted");
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setDescription(response);
+
+            event.replyEmbeds(eb.build()).setEphemeral(true).queue();
         } catch (InvalidTribeNameException e) {
             response = e.getMessage();
             System.out.println("Invalid register attempted");
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setDescription(response);
+
+            event.replyEmbeds(eb.build()).setEphemeral(true).queue();
         }
 
         EmbedBuilder eb = new EmbedBuilder();
