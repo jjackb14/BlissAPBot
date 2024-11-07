@@ -7,8 +7,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+/**
+ * Removes a player from the AP System.
+ */
 public class Remove {
 
+    /**
+     * Removes a player from the AP System based on the provided username and gamertag.
+     * @param event Event provided by the command.
+     */
     public static void remove(@NotNull SlashCommandInteractionEvent event) {
         Database db = Database.getInstance();
 

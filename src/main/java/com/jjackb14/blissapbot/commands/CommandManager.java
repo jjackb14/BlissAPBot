@@ -35,6 +35,12 @@ public class CommandManager extends ListenerAdapter {
             case("remove") -> {
                 Remove.remove(event);
             }
+            case("getallplayers") -> {
+                GetAllPlayers.getAllPlayers(event);
+            }
+            case("getplayersbymap") -> {
+                GetPlayersByMap.getPlayersByMap(event);
+            }
             case("test") -> {
                 event.reply("Test message").queue();
             }
@@ -75,6 +81,21 @@ public class CommandManager extends ListenerAdapter {
                 .addOptions(
                         new OptionData(OptionType.STRING, "ign", "The ign of the player to remove", true),
                         new OptionData(OptionType.STRING, "gamertag", "The gamertag of the player to remove", true)
+                ));
+
+        // Command /get all players
+        commandData.add(Commands.slash("getallplayers", "Gets all the players in the AP System.")
+                .setDefaultPermissions(DefaultMemberPermissions.DISABLED));
+
+        // Command /getplayersbymap [Map]
+        commandData.add(Commands.slash("getplayersbymap", "Gets all the players registered to a specific map.")
+                .setDefaultPermissions(DefaultMemberPermissions.DISABLED)
+                .addOptions(
+                        new OptionData(OptionType.STRING, "map", "The map to get all players from.", true)
+                                .addChoice("The Island", "Island")
+                                .addChoice("The Center", "Center")
+                                .addChoice("Scorched Earth", "Scorched")
+                                .addChoice("Aberration", "Aberration")
                 ));
 
         // Adds the Commands to the bot

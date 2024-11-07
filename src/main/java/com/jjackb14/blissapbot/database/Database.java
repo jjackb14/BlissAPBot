@@ -1,8 +1,12 @@
 package com.jjackb14.blissapbot.database;
 
+import com.jjackb14.blissapbot.exceptions.InvalidGamertagException;
+import com.jjackb14.blissapbot.exceptions.InvalidNameException;
+import com.jjackb14.blissapbot.exceptions.InvalidTribeNameException;
 import com.jjackb14.blissapbot.player.Player;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Manages the Database for BlissAPBot following the singleton design pattern.
@@ -76,7 +80,9 @@ public class Database {
 
     /**
      * Removes a player from the database based on their gamertag.
+     * @param user_name The players in game name.
      * @param gamertag The players gamertag.
+     * @return True if the player is removed and false if they are not.
      * @throws RuntimeException if there are any issues removing that player from the database.
      */
     public boolean removeData(String user_name, String gamertag) {
@@ -96,6 +102,35 @@ public class Database {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Gets all the players from the database and returns them in an ArrayList.
+     * @return All the players in the database.
+     */
+    public ArrayList<Player> getAllPlayers() {
+        ArrayList<Player> players = new ArrayList<>();
+        try {
+            ResultSet resultSet = con.createStatement().executeQuery("SELECT * FROM players");
+
+            while (resultSet.next()) {
+                String user_name = resultSet.getString("user_name");
+                String gamertag = resultSet.getString("gamertag");
+                String map = resultSet.getString("map");
+                String tribe = resultSet.getString("tribe");
+                int ap = resultSet.getInt("ap");
+                int seen = resultSet.getInt("seen");
+
+                Player player = new Player(user_name, gamertag, map, tribe, ap, seen);
+                players.add(player);
+            }
+            resultSet.close();
+            System.out.println("Players fetched.");
+        } catch (SQLException | InvalidGamertagException | InvalidNameException | InvalidTribeNameException e) {
+            throw new RuntimeException(e);
+        }
+
+        return players;
     }
 
 }

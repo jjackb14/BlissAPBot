@@ -71,6 +71,9 @@ public class Player {
      * @param tribeName The name of the tribe that a player is a member of.
      * @param ap The amount of AP a player has.
      * @param seen The number of times the player has been seen in a week.
+     * @throws InvalidNameException if the player's name is invalid.
+     * @throws InvalidGamertagException if the player's gamertag is invalid.
+     * @throws InvalidTribeNameException if the player's tribe name is invalid.
      */
     public Player(String userName, String gamerTag, String map, String tribeName, int ap, int seen) throws InvalidNameException,
             InvalidGamertagException, InvalidTribeNameException {
@@ -78,8 +81,8 @@ public class Player {
         setGamerTag(gamerTag);
         setMap(map);
         setTribeName(tribeName);
-        this.ap = ap;
-        this.seen = seen;
+        setAP(ap);
+        setSeen(seen);
     }
 
 
@@ -91,6 +94,9 @@ public class Player {
      * @param gamerTag The GamerTag of the Player registering.
      * @param map The Main map that the Player plays on.
      * @param tribeName The name of the tribe that a player is a member of.
+     * @throws InvalidNameException if the player's name is invalid.
+     * @throws InvalidGamertagException if the player's gamertag is invalid.
+     * @throws InvalidTribeNameException if the player's tribe name is invalid.
      */
     public Player(String userName, String gamerTag, String map, String tribeName) throws InvalidNameException, InvalidGamertagException,
             InvalidTribeNameException {
@@ -113,6 +119,7 @@ public class Player {
     /**
      * Sets the value of the field userName with the Player's in-game name.
      * @param userName The Player's in-game name.
+     * @throws InvalidNameException if the player's name is invalid.
      */
     public void setUserName(String userName) throws InvalidNameException {
         if (userName == null || "".equals(userName)) {
@@ -135,6 +142,7 @@ public class Player {
     /**
      * Sets the value of the field gamerTag with the Player's GamerTag.
      * @param gamerTag The Player's GamerTag.
+     * @throws InvalidGamertagException if the player's gamertag is invalid.
      */
     public void setGamerTag(String gamerTag) throws InvalidGamertagException {
         if (gamerTag == null || "".equals(gamerTag)) {
@@ -177,6 +185,7 @@ public class Player {
     /**
      * Sets the value of the field tribeName with the name of a Player's tribe.
      * @param tribeName The name of a Player's tribe.
+     * @throws InvalidTribeNameException if the player's tribe name is invalid.
      */
     public void setTribeName(String tribeName) throws InvalidTribeNameException {
         if (tribeName == null || "".equals(tribeName)) {
@@ -202,7 +211,7 @@ public class Player {
      * @throws IllegalArgumentException if AP is less than 1.
      */
     public void setAP(int ap) {
-        if (ap < 1) {
+        if (ap < 0) {
             throw new IllegalArgumentException("Error adding AP.");
         }
 
