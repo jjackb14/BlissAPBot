@@ -46,6 +46,9 @@ public class Player {
     /** Counter for the number of times a player has been seen. */
     private int seen;
 
+    /** Marks if a player has been seen today. */
+    private boolean seenToday;
+
     /** Max length that a Player name, GamerTag, and tribe name can be. Based of ARK's max. */
     private static final int MAX_NAME_LENGTH = 24;
 
@@ -71,18 +74,20 @@ public class Player {
      * @param tribeName The name of the tribe that a player is a member of.
      * @param ap The amount of AP a player has.
      * @param seen The number of times the player has been seen in a week.
+     * @param seenToday If a player has been seen today or not.
      * @throws InvalidNameException if the player's name is invalid.
      * @throws InvalidGamertagException if the player's gamertag is invalid.
      * @throws InvalidTribeNameException if the player's tribe name is invalid.
      */
-    public Player(String userName, String gamerTag, String map, String tribeName, int ap, int seen) throws InvalidNameException,
-            InvalidGamertagException, InvalidTribeNameException {
+    public Player(String userName, String gamerTag, String map, String tribeName, int ap, int seen, boolean seenToday) throws
+            InvalidNameException, InvalidGamertagException, InvalidTribeNameException {
         setUserName(userName);
         setGamerTag(gamerTag);
         setMap(map);
         setTribeName(tribeName);
         setAP(ap);
         setSeen(seen);
+        setSeenToday(seenToday);
     }
 
 
@@ -106,6 +111,7 @@ public class Player {
         setTribeName(tribeName);
         this.ap = 0;
         this.seen = 0;
+        this.seenToday = false;
     }
 
     /**
@@ -237,5 +243,31 @@ public class Player {
         }
 
         this.seen = seen;
+    }
+
+    /**
+     * Sets the value of seen today.
+     * @param seenToday The value to be set.
+     */
+    public void setSeenToday(boolean seenToday) {
+        this.seenToday = seenToday;
+    }
+
+    /**
+     * Gets the value of seenToday.
+     * @return Value of seenToday.
+     */
+    public boolean getSeenToday() {
+        return seenToday;
+    }
+
+    /**
+     * Marks a player as seen.
+     * If they have already been seen today then seen will not be changed.
+     */
+    public void markSeen() {
+        if (!getSeenToday()) {
+            seen++;
+        }
     }
 }

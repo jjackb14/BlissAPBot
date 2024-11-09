@@ -41,6 +41,12 @@ public class CommandManager extends ListenerAdapter {
             case("getplayersbymap") -> {
                 GetPlayersByMap.getPlayersByMap(event);
             }
+            case("markseen") -> {
+                MarkSeen.markSeen(event);
+            }
+            case("getplayerinfo") -> {
+                GetPlayerInfo.getPlayerInfo(event);
+            }
             case("test") -> {
                 event.reply("Test message").queue();
             }
@@ -83,11 +89,11 @@ public class CommandManager extends ListenerAdapter {
                         new OptionData(OptionType.STRING, "gamertag", "The gamertag of the player to remove", true)
                 ));
 
-        // Command /get all players
+        // Command: /get all players
         commandData.add(Commands.slash("getallplayers", "Gets all the players in the AP System.")
                 .setDefaultPermissions(DefaultMemberPermissions.DISABLED));
 
-        // Command /getplayersbymap [Map]
+        // Command: /getplayersbymap [Map]
         commandData.add(Commands.slash("getplayersbymap", "Gets all the players registered to a specific map.")
                 .setDefaultPermissions(DefaultMemberPermissions.DISABLED)
                 .addOptions(
@@ -96,6 +102,22 @@ public class CommandManager extends ListenerAdapter {
                                 .addChoice("The Center", "Center")
                                 .addChoice("Scorched Earth", "Scorched")
                                 .addChoice("Aberration", "Aberration")
+                ));
+
+        // Command: /markseen [IGN] [GT]
+        commandData.add(Commands.slash("markseen", "Marks a player as seen for today.")
+                .setDefaultPermissions(DefaultMemberPermissions.DISABLED)
+                .addOptions(
+                        new OptionData(OptionType.STRING, "ign", "Player's character name to be marked as seen.", true),
+                        new OptionData(OptionType.STRING, "gamertag", "Player's gamertag to be marked as seen", true)
+                ));
+
+        // Command: /getplayerinfo [IGN][GT]
+        commandData.add(Commands.slash("getplayerinfo", "Gets the value of all fields for a specific player.")
+                .setDefaultPermissions(DefaultMemberPermissions.DISABLED)
+                .addOptions(
+                        new OptionData(OptionType.STRING, "ign", "Player's character name to be found.", true),
+                        new OptionData(OptionType.STRING, "gamertag", "Player's gamertag to be found.", true)
                 ));
 
         // Adds the Commands to the bot

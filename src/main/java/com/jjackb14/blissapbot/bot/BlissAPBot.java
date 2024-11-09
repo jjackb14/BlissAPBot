@@ -6,9 +6,17 @@ import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
+import org.quartz.SchedulerFactory;
+import org.quartz.impl.StdSchedulerFactory;
 
 import javax.security.auth.login.LoginException;
 import java.sql.*;
+import java.time.Duration;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A Discord bot for managing the Activity Points System on ARK Bliss.
@@ -65,6 +73,28 @@ public class BlissAPBot {
     public static void main(String[] args) {
         try {
             BlissAPBot bot = new BlissAPBot();
+
+            Database db = Database.getInstance();
+
+            ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Europe/London"));
+            ZonedDateTime nextRun = now.withHour(0).withMinute(0).withSecond(0);
+            if (now.compareTo(nextRun) > 0) {
+                nextRun = nextRun.plusDays(1);
+            }
+
+            Duration duration = Duration.between(now, nextRun);
+            long initialDelay = duration.getSeconds();
+            ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+            Runnable task = db::resetSeenToday;
+
+            scheduler.scheduleAtFixedRate(task,
+                    initialDelay,
+                    TimeUnit.DAYS.toSeconds(1),
+                    TimeUnit.SECONDS
+            );
+
+            System.out.println(duration.toHours() + " hours until seenToday is reset.");
         }
         catch (LoginException | SQLException e) {
             System.out.println("ERROR: Provided token is not valid");
