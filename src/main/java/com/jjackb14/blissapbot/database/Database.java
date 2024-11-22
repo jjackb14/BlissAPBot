@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Manages the Database for BlissAPBot following the singleton design pattern.
  */
-public class Database  {
+public class Database implements Runnable {
 
     /** The current instance of the database. */
     private static Database instance;
@@ -167,6 +167,22 @@ public class Database  {
         }
 
         System.out.println("Seen today reset for all players.");
+    }
+
+    /**
+     * When an object implementing interface {@code Runnable} is used
+     * to create a thread, starting the thread causes the object's
+     * {@code run} method to be called in that separately executing
+     * thread.
+     * <p>
+     * The general contract of the method {@code run} is that it may
+     * take any action whatsoever.
+     *
+     * @see Thread#run()
+     */
+    @Override
+    public void run() {
+        resetSeenToday();
     }
 
     /**
