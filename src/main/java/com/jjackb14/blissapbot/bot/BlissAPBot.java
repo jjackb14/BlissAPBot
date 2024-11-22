@@ -1,13 +1,11 @@
 package com.jjackb14.blissapbot.bot;
 
-import com.jjackb14.blissapbot.commands.CommandManager;
+import com.jjackb14.blissapbot.commands.manager.CommandManager;
 import com.jjackb14.blissapbot.database.Database;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
-import org.quartz.SchedulerFactory;
-import org.quartz.impl.StdSchedulerFactory;
 
 import javax.security.auth.login.LoginException;
 import java.sql.*;

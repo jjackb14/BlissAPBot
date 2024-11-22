@@ -1,4 +1,4 @@
-package com.jjackb14.blissapbot.commands;
+package com.jjackb14.blissapbot.commands.execution;
 
 import com.jjackb14.blissapbot.database.Database;
 import net.dv8tion.jda.api.EmbedBuilder;

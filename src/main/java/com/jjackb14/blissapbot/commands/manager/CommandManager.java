@@ -1,5 +1,6 @@
-package com.jjackb14.blissapbot.commands;
+package com.jjackb14.blissapbot.commands.manager;
 
+import com.jjackb14.blissapbot.commands.execution.*;
 import com.jjackb14.blissapbot.playerlist.PlayerList;
 import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;

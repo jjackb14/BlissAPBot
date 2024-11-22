@@ -1,4 +1,4 @@
-package com.jjackb14.blissapbot.commands;
+package com.jjackb14.blissapbot.commands.execution;
 
 import com.jjackb14.blissapbot.database.Database;
 import com.jjackb14.blissapbot.player.Player;
