@@ -2,6 +2,7 @@ package com.jjackb14.blissapbot.bot;
 
 import com.jjackb14.blissapbot.commands.manager.CommandManager;
 import com.jjackb14.blissapbot.database.Database;
+import com.jjackb14.blissapbot.exceptions.DatabaseConnectionException;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
@@ -30,10 +31,8 @@ public class BlissAPBot {
 
     /**
      * Loads environment variables and builds the ShardManager.
-     * @throws LoginException when bot token is invalid.
-     * @throws SQLException if there are errors with the Database.
      */
-    public BlissAPBot() throws LoginException, SQLException {
+    public BlissAPBot()  {
 
         config = Dotenv.configure().load();
         String token = config.get("TOKEN");
@@ -44,7 +43,11 @@ public class BlissAPBot {
         //Register listeners
         shardManager.addEventListener(new CommandManager());
 
-        Database db = Database.getInstance();
+        try {
+            Database db = Database.getInstance();
+        } catch (RuntimeException e) {
+            System.out.println("Error connecting to the Database - Ignore if on Mac");
+        }
 
         System.out.println("Bot started");
     }
@@ -95,7 +98,7 @@ public class BlissAPBot {
 //
 //            System.out.println(duration.toHours() + " hours until seenToday is reset.");
 
-            Long delayTime;
+            long delayTime;
 
             ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
@@ -103,7 +106,8 @@ public class BlissAPBot {
                     .now(ZoneId.of("Europe/London")).plusDays(1).atTime(0, 0), ChronoUnit.MINUTES);
 
             if (initalDelay > TimeUnit.DAYS.toMinutes(1)) {
-                delayTime = LocalDateTime.now(ZoneId.of("Europe/London")).until(LocalDate.now(ZoneId.of("Europe/London"))
+                delayTime = LocalDateTime.now(ZoneId.of("Europe/London")).until(LocalDate.now(
+                        ZoneId.of("Europe/London"))
                         .atTime(0, 0), ChronoUnit.MINUTES);
             }
             else {
@@ -114,8 +118,8 @@ public class BlissAPBot {
 
             System.out.println("Seen today will be reset in " + delayTime / 60 + " hours!");
         }
-        catch (LoginException | SQLException e) {
-            System.out.println("ERROR: Provided token is not valid");
+        catch (DatabaseConnectionException e) {
+            System.out.println(e.getMessage());
         }
 
     }

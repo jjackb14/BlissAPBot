@@ -1,5 +1,6 @@
 package com.jjackb14.blissapbot.database;
 
+import com.jjackb14.blissapbot.exceptions.DatabaseConnectionException;
 import com.jjackb14.blissapbot.exceptions.InvalidGamertagException;
 import com.jjackb14.blissapbot.exceptions.InvalidNameException;
 import com.jjackb14.blissapbot.exceptions.InvalidTribeNameException;
@@ -51,7 +52,7 @@ public class Database implements Runnable {
 
             System.out.println("Database Connection Successful");
         } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException();
+            throw new DatabaseConnectionException();
         }
 
     }
