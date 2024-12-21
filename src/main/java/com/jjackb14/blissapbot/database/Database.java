@@ -84,7 +84,7 @@ public class Database implements Runnable {
     /**
      * Removes a player from the database based on their gamertag.
      * @param user_name The players in game name.
-     * @param gamertag The players gamertag.
+     * @param gamertag The player's gamertag.
      * @return True if the player is removed and false if they are not.
      * @throws RuntimeException if there are any issues removing that player from the database.
      */
