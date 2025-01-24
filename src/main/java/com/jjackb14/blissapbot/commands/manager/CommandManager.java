@@ -63,6 +63,14 @@ public class CommandManager extends ListenerAdapter {
      */
     @Override
     public void onGuildReady(@NotNull GuildReadyEvent event) {
+        setUpCommands(event);
+    }
+
+    /**
+     * Private method to add the commands to the bot to protect access to the discord api
+     * @param event The guild event.
+     */
+    private void setUpCommands(@NotNull GuildReadyEvent event) {
         List<CommandData> commandData = new ArrayList<>();
         //Command /test
         commandData.add(Commands.slash("test", "a debug command")
@@ -122,6 +130,6 @@ public class CommandManager extends ListenerAdapter {
                 ));
 
         // Adds the Commands to the bot
-       event.getGuild().updateCommands().addCommands(commandData).queue();
+        event.getGuild().updateCommands().addCommands(commandData).queue();
     }
 }
