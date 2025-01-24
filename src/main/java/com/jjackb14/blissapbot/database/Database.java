@@ -1,5 +1,6 @@
 package com.jjackb14.blissapbot.database;
 
+import com.jjackb14.blissapbot.exceptions.DatabaseConnectionException;
 import com.jjackb14.blissapbot.exceptions.InvalidGamertagException;
 import com.jjackb14.blissapbot.exceptions.InvalidNameException;
 import com.jjackb14.blissapbot.exceptions.InvalidTribeNameException;
@@ -51,7 +52,7 @@ public class Database implements Runnable {
 
             System.out.println("Database Connection Successful");
         } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException();
+            throw new DatabaseConnectionException();
         }
 
     }
@@ -83,7 +84,7 @@ public class Database implements Runnable {
     /**
      * Removes a player from the database based on their gamertag.
      * @param user_name The players in game name.
-     * @param gamertag The players gamertag.
+     * @param gamertag The player's gamertag.
      * @return True if the player is removed and false if they are not.
      * @throws RuntimeException if there are any issues removing that player from the database.
      */
