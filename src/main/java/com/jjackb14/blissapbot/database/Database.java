@@ -5,6 +5,7 @@ import com.jjackb14.blissapbot.exceptions.InvalidGamertagException;
 import com.jjackb14.blissapbot.exceptions.InvalidNameException;
 import com.jjackb14.blissapbot.exceptions.InvalidTribeNameException;
 import com.jjackb14.blissapbot.player.Player;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,10 +21,13 @@ public class Database implements Runnable {
     /** The connection to the database. */
     private Connection con;
 
+    private final Dotenv config;
+
     /**
      * Creates a database object and creates the connection to the MySQL database.
      */
     public Database() {
+        config = Dotenv.configure().load();
         createConnection();
     }
 
@@ -43,10 +47,14 @@ public class Database implements Runnable {
      * Creates the connection to the database.
      * @throws RuntimeException if there are any issues connecting to the database.
      */
-    public void createConnection() {
+    private void createConnection() {
+        String url = config.get("URL");
+        String user = config.get("USER");
+        String password = config.get("PASSWORD");
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "root");
+            con = DriverManager.getConnection(url, user, password);
 
             Statement stmt = con.createStatement();
 
